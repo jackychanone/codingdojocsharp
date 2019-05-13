@@ -1,0 +1,20 @@
+@model Product
+<h1>@Model.Name</h1>
+<h2>Categories:</h2>
+<ul>
+@foreach(var assoc in Model.Assocations)
+{
+    <li>@assoc.Category.Name</li>
+}
+</ul>
+
+<form asp-action="Create" asp-controller="Association" asp-route-isProduct="true" method="post">
+    <input type="hidden" name="ProductId" value="@Model.ProductId">
+    <select name="CategoryId">
+    @foreach(var p in ViewBag.Categories)
+    {
+        <option value="@p.CategoryId">@p.Name</option>
+    }
+    </select>
+    <input type="submit" value="Add Category">
+</form>
